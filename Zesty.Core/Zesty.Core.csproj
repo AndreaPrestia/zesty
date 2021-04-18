@@ -10,19 +10,13 @@
     <Folder Include="Entities\" />
     <Folder Include="Business\" />
     <Folder Include="Common\" />
-    <Folder Include="Scripts\" />
     <Folder Include="Handlers\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Storage\" />
-    <Folder Include="Api\" />
-    <Folder Include="Api\System\" />
     <Folder Include="Api\Sample\" />
-    <Folder Include="Scripts\SqlServer\" />
-    <Folder Include="Api\System\Admin\" />
     <Folder Include="Api\System\Admin\User\" />
     <Folder Include="Api\System\Admin\Role\" />
     <Folder Include="Api\System\Admin\Domain\" />
-    <Folder Include="Api\System\Admin\Resource\" />
   </ItemGroup>
 
   <ItemGroup>

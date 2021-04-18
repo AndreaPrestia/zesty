@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -107,6 +108,48 @@ namespace Zesty.Core.Storage
                             resource.Label = reader.Get<string>("Label");
                             resource.Image = reader.Get<string>("Image");
                             resource.Title = reader.Get<string>("Title");
+
+                            list.Add(resource);
+                        }
+
+                        return list;
+                    }
+                }
+            }
+        }
+
+        public List<Entities.Resource> GetAllResources()
+        {
+            List<Entities.Resource> list = new List<Resource>();
+
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_Resource_List", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Entities.Resource resource = new Entities.Resource();
+
+                            resource.Id = reader.Get<Guid>("Id");
+                            resource.ParentId = reader.Get<Guid>("ParentId");
+                            resource.Image = reader.Get<string>("Image");
+                            resource.Label = reader.Get<string>("Label");
+                            resource.Title = reader.Get<string>("Title");
+                            resource.Url = reader.Get<string>("Url");
+                            resource.IsPublic = reader.Get<bool>("IsPublic");
+                            resource.RequireToken = reader.Get<bool>("RequireToken");
+                            resource.Type = reader.Get<string>("Type");
+
+                            resource.Domain = new Entities.Domain();
+
+                            resource.Domain.Id = reader.Get<Guid>("DomainId");
+                            resource.Domain.Name = reader.Get<string>("Domain");
 
                             list.Add(resource);
                         }

@@ -23,6 +23,7 @@ namespace Zesty.Core
         void AuthorizeResource(Guid resourceId, Guid roleId);
         void DeauthorizeResource(Guid resourceId, Guid roleId);
         List<Entities.Resource> GetResources();
+        List<Entities.Resource> GetAllResources();
         List<Entities.Resource> GetResources(Guid roleId);
         List<Entities.Role> GetRoles();
         void ChangePassword(Guid id, string oldPassword, string password);

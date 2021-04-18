@@ -12,5 +12,7 @@ namespace Zesty.Core.Entities
         public int Order { get; set; }
         public bool IsPublic { get; set; }
         public bool RequireToken { get; set; }
+        public string Type { get; set; }
+        public Domain Domain { get; set; }
     }
 }

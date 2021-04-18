@@ -28,6 +28,11 @@ namespace Zesty.Core.Business
             return storage.GetResources();
         }
 
+        internal static List<Entities.Resource> ResourceAll()
+        {
+            return storage.GetAllResources();
+        }
+
         internal static List<Entities.Resource> ResourceList(Guid roleId)
         {
             //TODO add cache support

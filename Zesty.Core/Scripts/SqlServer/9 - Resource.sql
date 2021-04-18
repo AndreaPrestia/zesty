@@ -37,3 +37,7 @@ INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES ('626
 INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES ('6262c0fe-aa8f-443c-9349-7e6e38e06004','/system.admin.resource.authorize.api',0,0);
 INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES ('6262c0fe-aa8f-443c-9349-7e6e38e06005','/system.admin.resource.deauthorize.api',0,0);
 INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES ('6262c0fe-aa8f-443c-9349-7e6e38e12345','/system.refresh.api',1,0);
+INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES (N'9d840ccd-9fe1-4560-8fdf-06164ba0f7ee', N'/system.admin.resource.add.api', 0, 0)
+INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES (N'7cfaa996-9645-4fa1-a140-5c2c1781f580', N'/system.admin.resource.update.api', 0, 0)
+INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES (N'307a5b85-8bd0-44ec-9301-bfb92a30af6a', N'/system.admin.resource.delete.api', 0, 0)
+INSERT INTO [dbo].[Resource] ([Id],[Url],[IsPublic],[RequireToken]) VALUES (N'd9032574-e932-4695-b237-1b3962c5234b', N'/system.admin.resource.all.api', 0, 0)

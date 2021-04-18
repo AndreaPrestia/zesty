@@ -35,3 +35,7 @@ INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from
 INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.authorize.api'),'Zesty.Core.Api.System.Admin.Resource.Authorize, Zesty.Core');
 INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.deauthorize.api'),'Zesty.Core.Api.System.Admin.Resource.Deauthorize, Zesty.Core');
 INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.refresh.api'),'Zesty.Core.Api.System.Refresh, Zesty.Core');
+INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.add.api'),'Zesty.Core.Api.System.Admin.Resource.Add, Zesty.Core');
+INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.update.api'),'Zesty.Core.Api.System.Admin.Resource.Update, Zesty.Core');
+INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.delete.api'),'Zesty.Core.Api.System.Admin.Resource.Delete, Zesty.Core');
+INSERT INTO [dbo].[ResourceType] ([ResourceId],[Type]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.all.api'),'Zesty.Core.Api.System.Admin.Resource.All, Zesty.Core');

@@ -25,6 +25,10 @@ INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] fr
 INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.grants.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
 INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.authorize.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
 INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.deauthorize.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
+INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.add.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
+INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.update.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
+INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.delete.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
+INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/system.admin.resource.all.api'), '62ef76b8-e39e-41c7-86dc-4801642dc655');
 
 /* users */
 INSERT INTO [dbo].[ResourceRole] ([ResourceId],[RoleId]) VALUES ((select [Id] from [Resource] where [Url] = '/Secured/Hello'), '9E73B89C-E645-4084-B925-742818275DF5');
