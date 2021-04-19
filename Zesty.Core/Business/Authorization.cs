@@ -19,7 +19,7 @@ namespace Zesty.Core.Business
             context.Request.Headers.Clear();
         }
 
-        internal static bool CanAccess(string path, Entities.User user)
+        internal static bool CanAccess(string path, Entities.User user, Entities.Domain domain)
         {
             //TODO add cache
 
@@ -39,9 +39,16 @@ namespace Zesty.Core.Business
                 throw new SecurityException(Messages.AccessDenied);
             }
 
+            if (user.Domain == null)
+            {
+                logger.Warn($"Access denied for resource {path} for null user.Domain");
+
+                throw new SecurityException(Messages.AccessDenied);
+            }
+
             //TODO add cache
 
-            return storage.CanAccess(path, user);
+            return storage.CanAccess(path, user, domain);
         }
 
         internal static string GetToken(string sessionId, bool reusable)

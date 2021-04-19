@@ -16,10 +16,9 @@ namespace Zesty.Core.Middleware
 {
     public class ApiMiddleware
     {
-        private static NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-
-        bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
-        string refreshResource = Settings.Get("RefreshResourceName", "/system.refresh.api");
+        private static readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+        readonly bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
+        readonly string refreshResource = Settings.Get("RefreshResourceName", "/system.refresh.api");
 
         public ApiMiddleware(RequestDelegate next)
         {
@@ -269,7 +268,7 @@ namespace Zesty.Core.Middleware
                 throw new ApiNotFoundException(input.Resource);
             }
 
-            bool canAccess = Business.Authorization.CanAccess(input.Resource, Context.Current.User);
+            bool canAccess = Business.Authorization.CanAccess(input.Resource, Context.Current.User, Context.Current.User.Domain);
 
             if (!canAccess)
             {

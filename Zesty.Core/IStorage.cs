@@ -37,7 +37,7 @@ namespace Zesty.Core
         List<Language> GetLanguages();
         List<Resource> GetResources(string username, Guid domainId);
         void SaveToken(Entities.User user, string sessionId, string tokenValue, bool reusable);
-        bool CanAccess(string path, Entities.User user);
+        bool CanAccess(string path, Entities.User user, Entities.Domain domain);
         bool IsValid(Guid userId, string sessionId, string tokenValue);
         bool RequireToken(string path);
         bool IsPublicResource(string path);

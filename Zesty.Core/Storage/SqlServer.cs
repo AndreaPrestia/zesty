@@ -895,7 +895,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public bool CanAccess(string path, User user)
+        public bool CanAccess(string path, User user, Domain domain)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -907,6 +907,7 @@ namespace Zesty.Core.Storage
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@userid", Value = user.Id });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = domain.Id });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -1060,12 +1061,6 @@ namespace Zesty.Core.Storage
                             user.Firstname = reader.Get<string>("Firstname");
                             user.Lastname = reader.Get<string>("Lastname");
                             user.PasswordChanged = DateTimeHelper.GetUnixTimestamp(reader.Get<DateTime>("Created"));
-                            Guid? g = reader.Get<Guid?>("DomainId");
-
-                            if (g != null && g.HasValue)
-                            {
-                                user.DomainId = g.Value;
-                            }
                         }
 
                         return user;

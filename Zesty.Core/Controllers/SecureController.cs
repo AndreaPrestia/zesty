@@ -71,7 +71,7 @@ namespace Zesty.Core.Controllers
             }
             else
             {
-                bool canAccess = Business.Authorization.CanAccess(path, user);
+                bool canAccess = Business.Authorization.CanAccess(path, user, user.Domain);
 
                 logger.Info($"User {user.Username} can access path {path}: {canAccess}");
 

@@ -15,7 +15,5 @@ namespace Zesty.Core.Api.System.Admin.Resource
             public List<Entities.Resource> Resources { get; set; }
         }
     }
-
-
 }
-}
+
