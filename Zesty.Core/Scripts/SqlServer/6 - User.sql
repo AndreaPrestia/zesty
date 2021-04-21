@@ -1,1 +1,1 @@
-﻿INSERT INTO [dbo].[User] ([Id],[Username],[Email],[Firstname],[Lastname],[ResetToken],[Deleted],[Created]) VALUES ('b81d0335-c175-4af8-89f1-ff4ccc79c666','eca','emiliano.carlesi@gmail.com','Emiliano','Carlesi',null,null,getdate());
+﻿INSERT INTO [dbo].[User] ([Id],[Username],[Email],[Firstname],[Lastname],[ResetToken],[Deleted],[Created]) VALUES ('b81d0335-c175-4af8-89f1-ff4ccc79c666','aprestia','prestia.andrea94@gmail.com','Andrea','Prestia',null,null,getdate());

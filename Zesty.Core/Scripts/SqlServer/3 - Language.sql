@@ -1,2 +1,2 @@
-﻿insert into [dbo].[Language] ([Id], [Name],[Description],[Direction]) values (1, 'en', 'English', 'R');
-insert into [dbo].[Language] ([Id], [Name],[Description],[Direction]) values (2, 'it', 'Italiano', 'R');
+﻿insert into [dbo].[Language] ([Name],[Description],[Direction]) values ('en', 'English', 'R');
+insert into [dbo].[Language] ([Name],[Description],[Direction]) values ('it', 'Italiano', 'R');
