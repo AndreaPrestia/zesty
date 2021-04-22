@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security;
 using Microsoft.AspNetCore.Http;
+using Zesty.Core.Entities.Settings;
 
 namespace Zesty.Core.Business
 {
@@ -9,6 +10,8 @@ namespace Zesty.Core.Business
         private static NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
         private static IStorage storage = StorageManager.Storage;
+
+        private static string setDomainResource = Settings.Get("SetDomainResourceName", "/system.domain.api");
 
         public static void Logout(HttpContext context)
         {
@@ -39,7 +42,7 @@ namespace Zesty.Core.Business
                 throw new SecurityException(Messages.AccessDenied);
             }
 
-            if (user.Domain == null)
+            if (user.Domain == null && path != setDomainResource)
             {
                 logger.Warn($"Access denied for resource {path} for null user.Domain");
 

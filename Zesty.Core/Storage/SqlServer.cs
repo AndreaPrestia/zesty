@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
 using Zesty.Core.Entities.Settings;
@@ -907,7 +906,7 @@ namespace Zesty.Core.Storage
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@userid", Value = user.Id });
-                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = user.Domain.Id  });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = user.Domain != null ? user.Domain.Id : (object)DBNull.Value  });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

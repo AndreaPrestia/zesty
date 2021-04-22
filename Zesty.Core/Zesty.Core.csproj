@@ -7,11 +7,8 @@
   <ItemGroup>
     <Folder Include="Middleware\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Entities\" />
     <Folder Include="Business\" />
-    <Folder Include="Common\" />
     <Folder Include="Handlers\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Storage\" />
     <Folder Include="Api\Sample\" />
     <Folder Include="Api\System\Admin\User\" />
