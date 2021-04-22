@@ -268,7 +268,7 @@ namespace Zesty.Core.Middleware
                 throw new ApiNotFoundException(input.Resource);
             }
 
-            bool canAccess = Business.Authorization.CanAccess(input.Resource, Context.Current.User, Context.Current.User.Domain);
+            bool canAccess = Business.Authorization.CanAccess(input.Resource, Context.Current.User);
 
             if (!canAccess)
             {

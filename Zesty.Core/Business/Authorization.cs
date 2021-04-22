@@ -19,7 +19,7 @@ namespace Zesty.Core.Business
             context.Request.Headers.Clear();
         }
 
-        internal static bool CanAccess(string path, Entities.User user, Entities.Domain domain)
+        internal static bool CanAccess(string path, Entities.User user)
         {
             //TODO add cache
 
@@ -48,7 +48,7 @@ namespace Zesty.Core.Business
 
             //TODO add cache
 
-            return storage.CanAccess(path, user, domain);
+            return storage.CanAccess(path, user);
         }
 
         internal static string GetToken(string sessionId, bool reusable)
