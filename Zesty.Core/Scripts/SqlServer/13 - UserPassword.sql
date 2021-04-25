@@ -1,1 +1,1 @@
-﻿INSERT INTO [dbo].[UserPassword] ([Id],[UserId],[Password],[Deleted],[Created]) VALUES ('1afeb587-1849-4044-a0cc-cbd2e2de8346', 'b81d0335-c175-4af8-89f1-ff4ccc79c666','5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8',null,getdate());
+﻿INSERT [dbo].[UserPassword] ([Id], [UserId], [Password], [Deleted], [Created]) VALUES (N'cc24cf56-8ced-443e-b08d-bd2fe36ba2fd', N'b81d0335-c175-4af8-89f1-ff4ccc79c666', N'DB5FEBA52E5E6E1248EDC36A1EA60734249BEDE8DA83A5F90FAB522A3FDC4053', NULL, GETDATE())

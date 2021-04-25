@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using JWT.Algorithms;
 using JWT.Builder;
@@ -23,6 +25,28 @@ namespace Zesty.Core.Api.System
             else if (loginOutput.Result == LoginResult.PasswordExpired)
             {
                 throw new ApiAccessDeniedException(Messages.PasswordExpired);
+            }
+
+            if (!string.IsNullOrEmpty(request.Domain))
+            {
+                List<Entities.Domain> domains = Business.User.GetDomains(loginOutput.User.Username);
+
+                Entities.Domain domain = domains.Where(x => x.Id.ToString().ToLower() == request.Domain.ToLower() || x.Name.ToLower() == request.Domain.ToLower()).FirstOrDefault();
+
+                if (domain == null)
+                {
+                    domain = NestSearch(domains, request.Domain);
+
+                    if (domain == null)
+                    {
+                        throw new ApiNotFoundException(request.Domain);
+                    }
+                }
+
+                Business.User.SetDomain(loginOutput.User.Id, domain.Id);
+
+                loginOutput.User.DomainId = domain.Id;
+                loginOutput.User.Domain = domain;
             }
 
             LoginResponse response = new LoginResponse()
@@ -57,6 +81,26 @@ namespace Zesty.Core.Api.System
             input.Context.Session.Set(response.Output.User);
 
             return GetOutput(response);
+        }
+
+        private Entities.Domain NestSearch(List<Entities.Domain> domains, string domain)
+        {
+            foreach (Entities.Domain d in domains)
+            {
+                if (d.Id.ToString() == domain || d.Name == domain)
+                {
+                    return d;
+                }
+
+                Entities.Domain inner = NestSearch(d.Childs, domain);
+
+                if (inner != null)
+                {
+                    return inner;
+                }
+            }
+
+            return null;
         }
 
         private static string GetNewBearer()
