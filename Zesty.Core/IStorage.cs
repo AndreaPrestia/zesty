@@ -7,6 +7,8 @@ namespace Zesty.Core
 {
     public interface IStorage
     {
+        void AddAccessFailure(string username);
+        int CountAccessFailure(string username, DateTime start);
         void SetDomain(Guid userid, Guid domainid);
         void SaveBearer(Guid userid, string token);
         string GetSecret(string bearer);

@@ -8,6 +8,7 @@
         internal static readonly string ArgumentNotFound = "Required argument was not found";
         internal static readonly string Done = "Done";
         internal static readonly string LoginFailed = "Login failed";
+        internal static readonly string LoginBanned = "You tried to much invalid accesses. You're banned for {0} minutes";
         internal static readonly string PasswordExpired = "Password expired";
         internal static readonly string WrongApiOutput = "Wrong API output";
         internal static readonly string SettingsLoaded = "Application settings loaded";

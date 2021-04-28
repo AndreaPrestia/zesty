@@ -6,6 +6,7 @@ using JWT.Algorithms;
 using JWT.Builder;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
+using Zesty.Core.Entities.Settings;
 using Zesty.Core.Exceptions;
 
 namespace Zesty.Core.Api.System
@@ -15,6 +16,8 @@ namespace Zesty.Core.Api.System
         public override ApiHandlerOutput Process(ApiInputHandler input)
         {
             LoginRequest request = GetEntity<LoginRequest>(input);
+
+            CanAccess(request.Username);
 
             LoginOutput loginOutput = Business.User.Login(request.Username, request.Password);
 
@@ -81,6 +84,20 @@ namespace Zesty.Core.Api.System
             input.Context.Session.Set(response.Output.User);
 
             return GetOutput(response);
+        }
+
+        private void CanAccess(string username)
+        {
+            int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
+
+            int accessLimitMinutes = Settings.GetInt("AccessLimitMinutes", 5);
+
+            DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
+
+            if (Business.User.InvalidAccesses(username, start) >= accessFailureLimit)
+            {
+                throw new ApiAccessDeniedException(string.Format(Messages.LoginBanned, accessLimitMinutes));
+            }
         }
 
         private Entities.Domain NestSearch(List<Entities.Domain> domains, string domain)

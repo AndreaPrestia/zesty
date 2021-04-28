@@ -1191,5 +1191,44 @@ namespace Zesty.Core.Storage
                 }
             }
         }
+
+        public void AddAccessFailure(string username)
+        {
+            using(SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using(SqlCommand command = new SqlCommand("Zesty_AccessFailure_Add", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@username", Value = username.Trim() });
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public int CountAccessFailure(string username, DateTime start)
+        {
+            int accesses = 0;
+
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_AccessFailure_Count", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@username", Value = username.Trim() });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@start", Value = start });
+
+                    accesses = (int)command.ExecuteScalar();
+                }
+            }
+
+            return accesses;
+        }
     }
 }

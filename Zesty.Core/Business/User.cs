@@ -149,6 +149,11 @@ namespace Zesty.Core.Business
             return storage.GetRoles(username, domain);
         }
 
+        public static int InvalidAccesses(string username, DateTime start)
+        {
+            return storage.CountAccessFailure(username, start);
+        }
+
         public static LoginOutput Login(string username, string password)
         {
             logger.Info($"Login request for user {username}");
@@ -162,6 +167,7 @@ namespace Zesty.Core.Business
             if (output.User == null)
             {
                 output.Result = LoginResult.Failed;
+                storage.AddAccessFailure(username);
             }
             else
             {

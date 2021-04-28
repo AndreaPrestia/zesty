@@ -2,6 +2,7 @@
 delete from [dbo].[UserPassword];
 delete from [dbo].[UserProperty];
 delete from [dbo].[ResourceRole];
+delete from [dbo].[AccessFailure];
 delete from [dbo].[Authorization];
 delete from [dbo].[Domain];
 delete from [dbo].[Role];
