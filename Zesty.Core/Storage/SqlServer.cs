@@ -1192,7 +1192,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public void AddAccessFailure(string username)
+        public void AddAccessFailure(string ipAddress)
         {
             using(SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -1202,14 +1202,14 @@ namespace Zesty.Core.Storage
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.Add(new SqlParameter() { ParameterName = "@username", Value = username.Trim() });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@ipaddress", Value = ipAddress.Trim() });
 
                     command.ExecuteNonQuery();
                 }
             }
         }
 
-        public int CountAccessFailure(string username, DateTime start)
+        public int CountAccessFailure(string ipAddress, DateTime start)
         {
             int accesses = 0;
 
@@ -1221,7 +1221,7 @@ namespace Zesty.Core.Storage
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.Add(new SqlParameter() { ParameterName = "@username", Value = username.Trim() });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@ipaddress", Value = ipAddress.Trim() });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@start", Value = start });
 
                     accesses = (int)command.ExecuteScalar();

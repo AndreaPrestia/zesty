@@ -34,6 +34,8 @@ namespace Zesty.Core.Middleware
 
             try
             {
+                CanAccess(context.Request.HttpContext.Connection.RemoteIpAddress.ToString());
+
                 LoadUser(context);
 
                 string resourceName = context.Request.Path.Value;
@@ -122,6 +124,11 @@ namespace Zesty.Core.Middleware
                 content = JsonHelper.Serialize(new { Message = message });
 
                 Trace.Write(new TraceItem() { Error = e.Message, Millis = timeKeeper.Stop().TotalMilliseconds }, context);
+
+                if (context != null)
+                {
+                    Business.User.AddAccessFailure(context.Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                }
             }
             catch (ApiAccessDeniedException e)
             {
@@ -133,6 +140,11 @@ namespace Zesty.Core.Middleware
                 content = JsonHelper.Serialize(new { Message = message });
 
                 Trace.Write(new TraceItem() { Error = e.Message, Millis = timeKeeper.Stop().TotalMilliseconds }, context);
+
+                if (context != null)
+                {
+                    Business.User.AddAccessFailure(context.Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                }
             }
             catch (MissingRequiredProperty e)
             {
@@ -166,6 +178,11 @@ namespace Zesty.Core.Middleware
                 content = JsonHelper.Serialize(new { Message = message });
 
                 Trace.Write(new TraceItem() { Error = e.Message, Millis = timeKeeper.Stop().TotalMilliseconds }, context);
+
+                if(context != null)
+                {
+                    Business.User.AddAccessFailure(context.Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                }
             }
             catch (Exception e)
             {
@@ -197,6 +214,20 @@ namespace Zesty.Core.Middleware
                 Trace.Write(new TraceItem() { Millis = ms }, context);
 
                 logger.Info($"Request completed in {ms} ms");
+            }
+        }
+
+        private void CanAccess(string ipAddress)
+        {
+            int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
+
+            int accessLimitMinutes = Settings.GetInt("AccessLimitMinutes", 5);
+
+            DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
+
+            if (Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit)
+            {
+                throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
             }
         }
 

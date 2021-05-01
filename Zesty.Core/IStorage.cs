@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
 using Zesty.Core.Entities;
 
 namespace Zesty.Core
 {
     public interface IStorage
     {
-        void AddAccessFailure(string username);
-        int CountAccessFailure(string username, DateTime start);
+        void AddAccessFailure(string ipAddress);
+        int CountAccessFailure(string ipAddress, DateTime start);
         void SetDomain(Guid userid, Guid domainid);
         void SaveBearer(Guid userid, string token);
         string GetSecret(string bearer);
