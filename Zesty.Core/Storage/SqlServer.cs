@@ -189,7 +189,7 @@ namespace Zesty.Core.Storage
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@id", Value = domain.Id });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@name", Value = domain.Name });
-                    command.Parameters.Add(new SqlParameter() { ParameterName = "@parent", Value = domain.ParentDomainId == Guid.Empty ? DBNull.Value : (Object)domain.ParentDomainId});
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@parent", Value = domain.ParentDomainId == Guid.Empty ? DBNull.Value : (Object)domain.ParentDomainId });
 
                     command.ExecuteNonQuery();
                 }
@@ -906,7 +906,7 @@ namespace Zesty.Core.Storage
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@userid", Value = user.Id });
-                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = user.Domain != null ? user.Domain.Id : (object)DBNull.Value  });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = user.Domain != null ? user.Domain.Id : (object)DBNull.Value });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -1194,11 +1194,11 @@ namespace Zesty.Core.Storage
 
         public void AddAccessFailure(string ipAddress)
         {
-            using(SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
                 connection.Open();
 
-                using(SqlCommand command = new SqlCommand("Zesty_AccessFailure_Add", connection))
+                using (SqlCommand command = new SqlCommand("Zesty_AccessFailure_Add", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 
@@ -1229,6 +1229,85 @@ namespace Zesty.Core.Storage
             }
 
             return accesses;
+        }
+
+        public bool HasTwoFactorAuthentication(Guid domain)
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_Domain_TwoFactorAuthentication"))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domain", Value = domain });
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        return reader.Read();
+                    }
+                }
+            }
+        }
+
+        public bool OneTimePasswordExists(string user, Guid domain, string value)
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_OneTimePassword_Exists"))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@user", Value = user });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domain", Value = domain });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@value", Value = value });
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        return reader.Read();
+                    }
+                }
+            }
+        }
+
+        public void OneTimePasswordAdd(Guid user, Guid domain, string value)
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_OneTimePassword_Add"))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@user", Value = user });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domain", Value = domain });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@value", Value = value });
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void OneTimePasswordDelete(Guid user, Guid domain)
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand("Zesty_OneTimePassword_Delete"))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@user", Value = user });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@domain", Value = domain });
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

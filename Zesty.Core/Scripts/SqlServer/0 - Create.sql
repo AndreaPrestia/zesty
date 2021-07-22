@@ -1,4 +1,4 @@
-﻿/****** Object:  Table [dbo].[AccessFailure]    Script Date: 01/05/2021 16:16:45 ******/
+﻿/****** Object:  Table [dbo].[AccessFailure]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[AccessFailure](
 	[Created] [datetime] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Authorization]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Authorization]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[Authorization](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Bearer]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Bearer]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -41,7 +41,7 @@ CREATE TABLE [dbo].[Bearer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ClientSetting]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[ClientSetting]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,7 +55,7 @@ CREATE TABLE [dbo].[ClientSetting](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Domain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Domain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -70,7 +70,7 @@ CREATE TABLE [dbo].[Domain](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[History]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[History]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -88,7 +88,7 @@ CREATE TABLE [dbo].[History](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Language]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Language]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -104,7 +104,24 @@ CREATE TABLE [dbo].[Language](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Resource]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[OneTimePassword]    Script Date: 7/22/2021 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OneTimePassword](
+	[UserId] [uniqueidentifier] NOT NULL,
+	[DomainId] [uniqueidentifier] NOT NULL,
+	[Value] [varchar](200) NOT NULL,
+	[Created] [datetime] NOT NULL,
+ CONSTRAINT [PK_OneTimePassword] PRIMARY KEY CLUSTERED 
+(
+	[UserId] ASC,
+	[DomainId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Resource]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -125,7 +142,7 @@ CREATE TABLE [dbo].[Resource](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ResourceDomain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[ResourceDomain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +157,7 @@ CREATE TABLE [dbo].[ResourceDomain](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ResourceRole]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[ResourceRole]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +172,7 @@ CREATE TABLE [dbo].[ResourceRole](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ResourceType]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[ResourceType]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,7 +186,7 @@ CREATE TABLE [dbo].[ResourceType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Role]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Role]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -183,7 +200,7 @@ CREATE TABLE [dbo].[Role](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ServerSetting]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[ServerSetting]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +216,7 @@ CREATE TABLE [dbo].[ServerSetting](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Session]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Session]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -217,7 +234,7 @@ CREATE TABLE [dbo].[Session](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Token]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Token]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -231,7 +248,7 @@ CREATE TABLE [dbo].[Token](
 	[Deleted] [datetime] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Trace]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Trace]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -251,7 +268,7 @@ CREATE TABLE [dbo].[Trace](
 	[Millis] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Translation]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[Translation]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -267,7 +284,7 @@ CREATE TABLE [dbo].[Translation](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[User]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[User]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -289,7 +306,7 @@ CREATE TABLE [dbo].[User](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserPassword]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[UserPassword]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,7 +324,7 @@ CREATE TABLE [dbo].[UserPassword](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserProperty]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  Table [dbo].[UserProperty]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -342,6 +359,16 @@ ALTER TABLE [dbo].[Bearer]  WITH CHECK ADD  CONSTRAINT [FK_Bearer_User] FOREIGN 
 REFERENCES [dbo].[User] ([Id])
 GO
 ALTER TABLE [dbo].[Bearer] CHECK CONSTRAINT [FK_Bearer_User]
+GO
+ALTER TABLE [dbo].[OneTimePassword]  WITH CHECK ADD  CONSTRAINT [FK_OneTimePassword_Domain] FOREIGN KEY([DomainId])
+REFERENCES [dbo].[Domain] ([Id])
+GO
+ALTER TABLE [dbo].[OneTimePassword] CHECK CONSTRAINT [FK_OneTimePassword_Domain]
+GO
+ALTER TABLE [dbo].[OneTimePassword]  WITH CHECK ADD  CONSTRAINT [FK_OneTimePassword_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([Id])
+GO
+ALTER TABLE [dbo].[OneTimePassword] CHECK CONSTRAINT [FK_OneTimePassword_User]
 GO
 ALTER TABLE [dbo].[ResourceDomain]  WITH CHECK ADD  CONSTRAINT [FK_ResourceDomain_Domain] FOREIGN KEY([DomainId])
 REFERENCES [dbo].[Domain] ([Id])
@@ -383,7 +410,7 @@ REFERENCES [dbo].[User] ([Id])
 GO
 ALTER TABLE [dbo].[UserProperty] CHECK CONSTRAINT [FK_UserProperties_User]
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_AccessFailure_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_AccessFailure_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -406,7 +433,7 @@ BEGIN
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_AccessFailure_Count]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_AccessFailure_Count]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -432,7 +459,7 @@ BEGIN
 	AND [Created] BETWEEN @start AND GETDATE()
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Bearer_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Bearer_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -465,7 +492,7 @@ INSERT INTO [dbo].[Bearer]
            ,null)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Bearer_GetSecret]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Bearer_GetSecret]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -497,7 +524,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_CanAccess]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_CanAccess]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -544,7 +571,7 @@ and u.Id = @userid
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ChangePassword]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ChangePassword]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -588,7 +615,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_Delete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -612,7 +639,7 @@ BEGIN
 	DELETE FROM [dbo].[ClientSetting] WHERE [Key] = @key
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -635,7 +662,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_Set]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ClientSetting_Set]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -676,7 +703,7 @@ BEGIN
 	END
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Domain_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Domain_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -712,7 +739,7 @@ INSERT INTO [dbo].[Domain]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Domain_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Domain_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -737,7 +764,7 @@ SELECT [Id]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Domain_List_ByUsername]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Domain_List_ByUsername]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -770,7 +797,30 @@ END
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Delete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Domain_TwoFactorAuthentication]    Script Date: 7/22/2021 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Zesty_Domain_TwoFactorAuthentication]
+	-- Add the parameters for the stored procedure here
+	@domain uniqueidentifier
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT [Value] FROM [dbo].[DomainProperty] WHERE [DomainId] = @domain AND [Key] = 'TwoFactorAuthentication'
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -796,7 +846,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Get]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Get]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -826,7 +876,7 @@ WHERE
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -855,7 +905,7 @@ WHERE
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Set]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_DomainProperty_Set]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -902,7 +952,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_History_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_History_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -946,7 +996,7 @@ INSERT INTO [dbo].[History]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_IsValid]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_IsValid]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -986,7 +1036,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Language_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Language_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1014,7 +1064,7 @@ ORDER BY [Id];
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Login]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Login]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1056,7 +1106,84 @@ and u.Deleted is null;
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_RequireToken]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_OneTimePassword_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Zesty_OneTimePassword_Add]
+	-- Add the parameters for the stored procedure here
+	@user uniqueidentifier,
+	@domain uniqueidentifier,
+	@value varchar(200)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[OneTimePassword] WHERE [UserId] = @user AND [DomainId] = @domain;
+	INSERT INTO [dbo].[OneTimePassword] ([UserId], [DomainId], [Value]) VALUES (@user, @domain, @value);
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Zesty_OneTimePassword_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Zesty_OneTimePassword_Delete]
+	-- Add the parameters for the stored procedure here
+	@user varchar(200),
+	@domain uniqueidentifier
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    DELETE FROM [OneTimePassword] WHERE UserId = (SELECT Id FROM [User] WHERE [Username] = @user OR [Email] = @user) AND DomainId = @domain
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Zesty_OneTimePassword_Exists]    Script Date: 7/22/2021 5:14:01 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[Zesty_OneTimePassword_Exists]
+	-- Add the parameters for the stored procedure here
+	@user varchar(200),
+	@domain uniqueidentifier,
+	@value varchar(200)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    SELECT otp.[Value] FROM [dbo].[User] u 
+	JOIN [OneTimePassword] otp ON otp.UserId = u.Id
+	WHERE otp.[Value] = @value 
+	AND otp.UserId = (SELECT Id FROM [User] WHERE [Username] = @user OR [Email] = @user)
+	AND otp.DomainId = @domain
+	AND DATEADD (MINUTE , (SELECT TOP 1 CONVERT(int, [Value]) FROM [dbo].ServerSetting WHERE [Key] = 'ExpiringMinutesOtp') , otp.[Created] ) > GETDATE()  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Zesty_RequireToken]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1090,7 +1217,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResetPassword]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResetPassword]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1136,7 +1263,7 @@ BEGIN
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1226,7 +1353,7 @@ IF @@TRANCOUNT > 0
 		COMMIT TRANSACTION;  
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Delete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1270,7 +1397,7 @@ IF @@TRANCOUNT > 0
 		COMMIT TRANSACTION;  
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_IsPublic]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_IsPublic]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1305,7 +1432,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1347,7 +1474,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_List_ByUsernameDomain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_List_ByUsernameDomain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1397,7 +1524,7 @@ order by rs.[Order]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Update]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Resource_Update]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1479,7 +1606,7 @@ IF @@TRANCOUNT > 0
 		COMMIT TRANSACTION;  
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceAuthorize]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceAuthorize]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1511,7 +1638,7 @@ INSERT INTO [dbo].[ResourceRole]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceDeauthorize]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceDeauthorize]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1540,7 +1667,7 @@ DELETE FROM [dbo].[ResourceRole]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceList]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceList]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1577,7 +1704,7 @@ SELECT [Id]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceListGrant]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceListGrant]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1610,7 +1737,7 @@ WHERE l.Id = @role
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceListGrantDomain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceListGrantDomain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1645,7 +1772,7 @@ WHERE l.Id = @role AND rd.DomainId = @domain
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ResourceType_List_ByResourceName]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ResourceType_List_ByResourceName]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1677,7 +1804,7 @@ WHERE
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Role_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Role_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1710,7 +1837,7 @@ INSERT INTO [dbo].[Role]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Role_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Role_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1734,7 +1861,7 @@ select r.[Id], r.[Name] from [dbo].[Role] r
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Role_List_ByUsernameDomain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Role_List_ByUsernameDomain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1769,7 +1896,7 @@ and d.[Id] = @domain
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_ServerSetting_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_ServerSetting_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1796,7 +1923,7 @@ SELECT [Key]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Session_Create]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Session_Create]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1838,7 +1965,7 @@ INSERT INTO [dbo].[Session]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Session_Get]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Session_Get]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1862,7 +1989,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Session_Save]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Session_Save]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1887,7 +2014,7 @@ BEGIN
 	UPDATE [dbo].[Session] SET [Body] = @body WHERE [Bearer] = @bearer;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Token_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Token_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1927,7 +2054,7 @@ INSERT INTO [dbo].[Token]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Trace]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Trace]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1985,7 +2112,7 @@ INSERT INTO [dbo].[Trace]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_Translation_List_ByLanguage]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_Translation_List_ByLanguage]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2021,7 +2148,7 @@ l.[Name] = @language
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Add]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Add]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2053,7 +2180,7 @@ INSERT INTO [dbo].[User] ([Id],[Username],[Email],[Firstname],[Lastname],[ResetT
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_AlreadyExists]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_AlreadyExists]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2078,7 +2205,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Authorize]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Authorize]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2125,7 +2252,7 @@ else
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Deauthorize]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Deauthorize]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2165,7 +2292,7 @@ else
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Delete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2190,7 +2317,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Domain]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Domain]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2210,7 +2337,7 @@ BEGIN
 	UPDATE [User] SET [DomainId] = @domainid WHERE [Id] = @userid;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Get]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Get]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2241,7 +2368,7 @@ else
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Get_ByResetToken]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Get_ByResetToken]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2279,7 +2406,7 @@ and u.Deleted is null;
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Get_ByUsername]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Get_ByUsername]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2313,7 +2440,7 @@ where
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_HardDelete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_HardDelete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2342,7 +2469,7 @@ BEGIN
 	delete from [dbo].[User] where [id] = @userid;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_List]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_List]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2364,7 +2491,7 @@ BEGIN
 	select [Id], [Username], [Email], [Firstname], [Lastname], [Deleted], [Created] from dbo.[user]
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Update]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Update]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2400,7 +2527,7 @@ WHERE
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_User_Update_ResetToken]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_User_Update_ResetToken]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2441,7 +2568,7 @@ END
 
 --exec Zesty_User_Update_ResetToken 'emilianocarlesi@gmail.com'
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_Delete]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_Delete]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2468,7 +2595,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_List_ByUserid]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_List_ByUserid]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2497,7 +2624,7 @@ WHERE
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_Set]    Script Date: 01/05/2021 16:16:45 ******/
+/****** Object:  StoredProcedure [dbo].[Zesty_UserProperty_Set]    Script Date: 7/22/2021 5:14:01 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

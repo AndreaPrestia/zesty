@@ -20,5 +20,13 @@ namespace Zesty.Core.Integration
                 SmsHelper.SendSms($"Your resetToken: {resetToken}", mobile);
             }
         }
+
+        public void GenerateOtp(Guid user, Guid domain)
+        {
+            string otp = RandomHelper.GenerateSecureRandom();
+
+            Business.OneTimePassword.Add(user, domain, otp);
+
+        }
     }
 }

@@ -50,5 +50,9 @@ namespace Zesty.Core
         List<Entities.Domain> GetDomainsList();
         List<Entities.Role> GetRoles(string username, Guid domainId);
         bool ChangePassword(string username, string currentPassword, string newPassword);
+        bool HasTwoFactorAuthentication(Guid domain);
+        bool OneTimePasswordExists(string user, Guid domain, string value);
+        void OneTimePasswordAdd(Guid user, Guid domain, string value);
+        void OneTimePasswordDelete(Guid user, Guid domain);
     }
 }

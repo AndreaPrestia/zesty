@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Zesty.Core.Business
 {
@@ -14,6 +15,11 @@ namespace Zesty.Core.Business
         internal static void Add(Entities.Domain domain)
         {
             storage.Add(domain);
+        }
+
+        internal static bool HasTwoFactorAuthentication(Guid domain)
+        {
+            return storage.HasTwoFactorAuthentication(domain);
         }
     }
 }

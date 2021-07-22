@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Middleware\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Business\" />
     <Folder Include="Handlers\" />
     <Folder Include="Storage\" />
     <Folder Include="Api\Sample\" />

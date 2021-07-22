@@ -7,6 +7,7 @@ using System.Text;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
 using Zesty.Core.Exceptions;
+using Zesty.Core.Integration;
 
 namespace Zesty.Core.Api.System
 {
@@ -47,6 +48,17 @@ namespace Zesty.Core.Api.System
 
                 loginOutput.User.DomainId = domain.Id;
                 loginOutput.User.Domain = domain;
+            }
+
+            if(loginOutput.User.DomainId != Guid.Empty && Business.Domain.HasTwoFactorAuthentication(loginOutput.User.DomainId))
+            {
+                IAuthProcessor processor = new Skebby();
+
+                processor.GenerateOtp(loginOutput.User.Id, loginOutput.User.DomainId);
+
+                LoginTwoFactorResponse twoFactorResponse = new LoginTwoFactorResponse() { Domain = loginOutput.User.DomainId };
+
+                return GetOutput(twoFactorResponse);
             }
 
             LoginResponse response = new LoginResponse()
@@ -120,5 +132,10 @@ namespace Zesty.Core.Api.System
     {
         public LoginOutput Output { get; set; }
         public string Bearer { get; set; }
+    }
+
+    public class LoginTwoFactorResponse
+    {
+        public Guid Domain { get; set; }
     }
 }
