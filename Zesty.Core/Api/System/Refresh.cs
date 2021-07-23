@@ -31,7 +31,7 @@ namespace Zesty.Core.Api.System
 
             RefreshResponse response = new RefreshResponse() { Bearer = token };
 
-            return GetOutput();
+            return GetOutput(response);
         }
     }
 
