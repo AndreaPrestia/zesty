@@ -3,7 +3,6 @@ using JWT.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
 using Zesty.Core.Exceptions;

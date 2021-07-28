@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Net.WebSockets;
 using Zesty.Core.Entities.Settings;
 using Zesty.Core.Middleware;
 
@@ -54,9 +55,19 @@ namespace Zesty.Core.Common
 
             builder.UseCookiePolicy();
 
-            builder.MapWhen(context => context.Request.Path.ToString().EndsWith(".api"), appBranch => {
+            builder.MapWhen(context => context.Request.Path.ToString().EndsWith(".api"), appBranch =>
+            {
                 appBranch.UseMiddleware<ApiMiddleware>();
             });
+
+            WebSocketOptions webSocketOptions = new WebSocketOptions()
+            {
+                KeepAliveInterval = TimeSpan.FromSeconds(120),
+            };
+
+            origins.ForEach(origin => webSocketOptions.AllowedOrigins.Add(origin));
+
+            builder.UseWebSockets(webSocketOptions);
         }
 
         public static void AddZesty(this IServiceCollection services)
