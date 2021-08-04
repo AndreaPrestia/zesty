@@ -94,47 +94,9 @@ namespace Zesty.Core.Controllers
             {
                 if(user == null)
                 {
-                    logger.Info($"Bearer received: {bearer}");
+                    LoadUser(bearer);
 
-                    string secret = Business.User.GetSecret(bearer);
-
-                    if (String.IsNullOrWhiteSpace(secret))
-                    {
-                        throw new SecurityException("Invalid token");
-                    }
-
-                    var json = JwtBuilder.Create()
-               .WithAlgorithm(new HMACSHA256Algorithm())
-               .WithSecret(secret)
-               .MustVerifySignature()
-               .Decode(bearer);
-
-                    logger.Debug($"Json from bearer: {json}");
-
-                    Bearer b = JsonHelper.Deserialize<Bearer>(json);
-
-                    if (b == null || b.User == null)
-                    {
-                        return;
-                    }
-
-                    DateTime expiration = DateTimeHelper.GetFromUnixTimestamp(b.Exp);
-
-                    if (expiration < DateTime.Now && HttpContext.Request.Path != refreshResource)
-                    {
-                        throw new ApiTokenExpiredException("Token expired");
-                    }
-
-                    if (b.User.DomainId != Guid.Empty)
-                    {
-                        List<Domain> domains = Business.User.GetDomains(b.User.Username);
-
-                        b.User.Domain = domains.Where(x => x.Id == b.User.DomainId).FirstOrDefault();
-                    }
-
-                    Context.Current.User = b.User;
-
-                    user = b.User;
+                    user = Context.Current.User;
                 }
 
                 bool canAccess = Business.Authorization.CanAccess(path, user, method);
@@ -214,6 +176,49 @@ namespace Zesty.Core.Controllers
                     }
                 }
             }
+        }
+
+        private void LoadUser(string bearer)
+        {
+            logger.Info($"Bearer received: {bearer}");
+
+            string secret = Business.User.GetSecret(bearer);
+
+            if (String.IsNullOrWhiteSpace(secret))
+            {
+                throw new SecurityException("Invalid token");
+            }
+
+            var json = JwtBuilder.Create()
+       .WithAlgorithm(new HMACSHA256Algorithm())
+       .WithSecret(secret)
+       .MustVerifySignature()
+       .Decode(bearer);
+
+            logger.Debug($"Json from bearer: {json}");
+
+            Bearer b = JsonHelper.Deserialize<Bearer>(json);
+
+            if (b == null || b.User == null)
+            {
+                return;
+            }
+
+            DateTime expiration = DateTimeHelper.GetFromUnixTimestamp(b.Exp);
+
+            if (expiration < DateTime.Now && HttpContext.Request.Path != refreshResource)
+            {
+                throw new ApiTokenExpiredException("Token expired");
+            }
+
+            if (b.User.DomainId != Guid.Empty)
+            {
+                List<Domain> domains = Business.User.GetDomains(b.User.Username);
+
+                b.User.Domain = domains.Where(x => x.Id == b.User.DomainId).FirstOrDefault();
+            }
+
+            Context.Current.User = b.User;
         }
     }
 }
