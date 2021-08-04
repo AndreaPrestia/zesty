@@ -13,6 +13,8 @@ namespace Zesty.Core.Business
 
         private static string setDomainResource = Settings.Get("SetDomainResourceName", "/system.domain.api");
 
+        private static string setDomainResourceController = Settings.Get("SetDomainResourceController", "/api/Secured/Domain");
+
         public static void Logout(HttpContext context)
         {
             Context.Current.Reset();
@@ -22,11 +24,11 @@ namespace Zesty.Core.Business
             context.Request.Headers.Clear();
         }
 
-        internal static bool CanAccess(string path, Entities.User user)
+        internal static bool CanAccess(string path, Entities.User user, string method = null)
         {
             //TODO add cache
 
-            bool isPublic = StorageManager.Storage.IsPublicResource(path);
+            bool isPublic = StorageManager.Storage.IsPublicResource(path, method);
 
             if (isPublic)
             {
@@ -42,7 +44,7 @@ namespace Zesty.Core.Business
                 throw new SecurityException(Messages.AccessDenied);
             }
 
-            if (user.Domain == null && path != setDomainResource)
+            if (user.Domain == null && path != setDomainResource && path != setDomainResourceController)
             {
                 logger.Warn($"Access denied for resource {path} for null user.Domain");
 
@@ -51,7 +53,7 @@ namespace Zesty.Core.Business
 
             //TODO add cache
 
-            return storage.CanAccess(path, user);
+            return storage.CanAccess(path, user, method);
         }
 
         internal static string GetToken(string sessionId, bool reusable)
@@ -63,11 +65,11 @@ namespace Zesty.Core.Business
             return tokenValue;
         }
 
-        internal static bool RequireToken(string path)
+        internal static bool RequireToken(string path, string method = null)
         {
             //TODO add cache
 
-            return storage.RequireToken(path);
+            return storage.RequireToken(path, method);
         }
 
         internal static bool IsValid(Guid userId, string sessionId, string tokenValue)

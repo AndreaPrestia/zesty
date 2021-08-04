@@ -894,7 +894,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public bool CanAccess(string path, User user)
+        public bool CanAccess(string path, User user, string method = null)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -907,6 +907,7 @@ namespace Zesty.Core.Storage
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@userid", Value = user.Id });
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@domainid", Value = user.Domain != null ? user.Domain.Id : (object)DBNull.Value });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@method", Value = !string.IsNullOrEmpty(method) ? method.Trim() : (object)DBNull.Value });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -941,7 +942,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public bool IsPublicResource(string path)
+        public bool IsPublicResource(string path, string method)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -952,6 +953,7 @@ namespace Zesty.Core.Storage
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@method", Value = !string.IsNullOrEmpty(method) ? method.Trim() : (object)DBNull.Value });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
@@ -1068,7 +1070,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public bool RequireToken(string path)
+        public bool RequireToken(string path, string method = null)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -1079,6 +1081,7 @@ namespace Zesty.Core.Storage
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     command.Parameters.Add(new SqlParameter() { ParameterName = "@path", Value = path });
+                    command.Parameters.Add(new SqlParameter() { ParameterName = "@method", Value = !string.IsNullOrEmpty(method) ? method : (object)DBNull.Value });
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {

@@ -38,10 +38,10 @@ namespace Zesty.Core
         List<Language> GetLanguages();
         List<Resource> GetResources(string username, Guid domainId);
         void SaveToken(Entities.User user, string sessionId, string tokenValue, bool reusable);
-        bool CanAccess(string path, Entities.User user);
+        bool CanAccess(string path, Entities.User user, string method = null);
         bool IsValid(Guid userId, string sessionId, string tokenValue);
-        bool RequireToken(string path);
-        bool IsPublicResource(string path);
+        bool RequireToken(string path, string method = null);
+        bool IsPublicResource(string path, string method = null);
         void Save(Entities.HistoryItem resource);
         string GetType(string resourceName);
         Entities.User Login(string username, string password);
