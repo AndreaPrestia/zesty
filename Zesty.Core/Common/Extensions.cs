@@ -70,6 +70,11 @@ namespace Zesty.Core.Common
             builder.UseWebSockets(webSocketOptions);
         }
 
+        public static void UseZestyErrorController(this IApplicationBuilder builder)
+        {
+            builder.UseExceptionHandler("/error");
+        }
+
         public static void AddZesty(this IServiceCollection services)
         {
             services.AddCors();

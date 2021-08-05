@@ -21,7 +21,6 @@ namespace Zesty.Core.Api.System
                 throw new ApiAccessDeniedException(Messages.LoginFailed);
             }
 
-
             LoginOutput loginOutput = new LoginOutput();
 
             loginOutput.User = Business.User.Get(request.Username);
