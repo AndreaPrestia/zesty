@@ -4,10 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security;
-using System.Text;
 using Zesty.Core.Api.System;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
@@ -157,7 +154,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        [Route("OneTimePassword")]
+        [Route("Otp")]
         public IActionResult OneTimePassword(OneTimePasswordRequest request)
         {
             ValidateEntity<OneTimePasswordRequest>(request);
@@ -242,7 +239,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        [Route("SetResetToken")]
+        [Route("Reset")]
         public IActionResult SetResetToken(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -282,7 +279,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        [Route("ResetPassword")]
+        [Route("Reset")]
         public IActionResult ResetPassword(ResetPasswordRequest request)
         {
             ValidateEntity<ResetPasswordRequest>(request);
@@ -412,7 +409,7 @@ namespace Zesty.Core.Controllers
         /// Available roles by domain
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(typeof(RolesResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Entities.RolesResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
@@ -429,7 +426,7 @@ namespace Zesty.Core.Controllers
                 throw new ApiInvalidArgumentException(nameof(domain));
             }
 
-            return GetOutput(new RolesResponse()
+            return GetOutput(new Entities.RolesResponse()
             {
                 Roles = Business.User.GetRoles(Context.Current.User.Username, domain)
             });
@@ -467,7 +464,7 @@ namespace Zesty.Core.Controllers
         /// Available domains
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(typeof(DomainsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Entities.DomainsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
@@ -481,14 +478,14 @@ namespace Zesty.Core.Controllers
         {
             RequireUser();
 
-            return GetOutput(new DomainsResponse()
+            return GetOutput(new Entities.DomainsResponse()
             {
                 Domains = Business.User.GetDomains(Context.Current.User.Username)
             });
         }
 
         /// <summary>
-        /// Login Api
+        /// Set current domain as selected
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(LoginOutput), StatusCodes.Status200OK)]
@@ -622,7 +619,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        [Route("UserByResetToken")]
+        [Route("ResetToken")]
         public IActionResult UserByResetToken(Guid token)
         {
             UserByResetTokenResponse response = new UserByResetTokenResponse()
@@ -699,7 +696,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         [Route("ClientSettings")]
-        public IActionResult ClientSettings(Guid token)
+        public IActionResult ClientSettings()
         {
             return GetOutput(new ClientSettingsResponse()
             {
