@@ -24,6 +24,8 @@ namespace Zesty.Core.Controllers
         {
             base.OnActionExecuting(context);
 
+            CanAccess(HttpContext.Connection.RemoteIpAddress.ToString());
+
             string scheme = HttpContext.Request.Scheme;
             string host = HttpContext.Request.Host.Value;
             string path = HttpContext.Request.Path;
@@ -219,6 +221,20 @@ namespace Zesty.Core.Controllers
             }
 
             Context.Current.User = b.User;
+        }
+
+        private void CanAccess(string ipAddress)
+        {
+            int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
+
+            int accessLimitMinutes = Settings.GetInt("AccessLimitMinutes", 5);
+
+            DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
+
+            if (Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit)
+            {
+                throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
+            }
         }
     }
 }
