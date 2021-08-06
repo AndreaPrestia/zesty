@@ -17,8 +17,9 @@ namespace Zesty.Core.Controllers
     {
         #region Domain
         /// <summary>
-        /// Domain add 
+        /// Create a domain on the system
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(AddDomainResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -50,7 +51,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Domain list 
+        /// List of all domains on the system 
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(DomainsResponse), StatusCodes.Status200OK)]
@@ -74,8 +75,9 @@ namespace Zesty.Core.Controllers
 
         #region Role
         /// <summary>
-        /// Role add 
+        /// Add a role on the system
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(AddRoleResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -106,7 +108,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Role list 
+        /// Role list on the system
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(RolesResponse), StatusCodes.Status200OK)]
@@ -130,8 +132,9 @@ namespace Zesty.Core.Controllers
 
         #region Resource
         /// <summary>
-        /// Resource add 
+        /// Add a resource (ZestyAPI, .NET Core API/Action, everything that can be an url :) ) on the system
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -176,7 +179,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource all 
+        /// Returns all resources on the system 
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(ResourcesAllResponse), StatusCodes.Status200OK)]
@@ -195,8 +198,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource authorize 
+        /// Authorize a resource on a role
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -218,8 +222,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource deauthorize 
+        /// Deauthorize a resource on a role
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -241,8 +246,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource delete 
+        /// Deletes a resource. It can be dangerous, use it with safe :) 
         /// </summary>
+        /// <param name="id"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -274,7 +280,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource grants 
+        /// List of resources for a role 
         /// </summary>
         /// <returns></returns>
         ///<param name="roleId"></param>
@@ -316,8 +322,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Resource update 
+        /// Update the resources
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -367,7 +374,7 @@ namespace Zesty.Core.Controllers
 
         #region User
         /// <summary>
-        /// Add user
+        /// Add a user to the system
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -406,7 +413,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Authorize user
+        /// Add an authorization for a User on a Domain for a Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -445,7 +452,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Deauthorize user
+        /// Remove an authorization for a User on a Domain for a Role
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -484,7 +491,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Delete a user
+        /// Logical delete of a user from the system
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -513,7 +520,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Get a user
+        /// Get a user by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -543,7 +550,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Hard delete a user
+        /// Physical delete a user from the system
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -572,7 +579,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// User list by domain
+        /// User list from the system. Can be time consuming, we should paginate it :)
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -594,6 +601,11 @@ namespace Zesty.Core.Controllers
             });
         }
 
+        /// <summary>
+        /// Updates specific user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]

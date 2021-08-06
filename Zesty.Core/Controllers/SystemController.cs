@@ -22,8 +22,9 @@ namespace Zesty.Core.Controllers
 
         #region Access
         /// <summary>
-        /// Login 
+        /// Login api
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -142,8 +143,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// One time password 
+        /// One time password api. It must be called from your client if it's enabled the double authentication.
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(LoginResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -227,8 +229,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Set reset token 
+        /// Asks for reset password
         /// </summary>
+        /// <param name="email"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -267,8 +270,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Reset password 
+        /// Sends reset token and new password
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -293,8 +297,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Password 
+        /// Used to change your password. It's used usually to change the password after login, when it's thrown a PasswordExpiredException
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -340,7 +345,7 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Refresh bearer 
+        /// Refresh zesty api bearer
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(RefreshResponse), StatusCodes.Status200OK)]
@@ -382,8 +387,9 @@ namespace Zesty.Core.Controllers
 
 
         /// <summary>
-        /// Antiforgery token 
+        /// Requests an antiforgery token for current user
         /// </summary>
+        /// <param name="isReusable"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(TokenResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -406,8 +412,9 @@ namespace Zesty.Core.Controllers
 
         #region Roles
         /// <summary>
-        /// Available roles by domain
+        /// Available roles for domain
         /// </summary>
+        /// <param name="domain"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(Entities.RolesResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -435,7 +442,7 @@ namespace Zesty.Core.Controllers
 
         #region Resources
         /// <summary>
-        /// Available resources by domain
+        /// Available resources by current domain
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(ResourcesResponse), StatusCodes.Status200OK)]
@@ -461,7 +468,7 @@ namespace Zesty.Core.Controllers
 
         #region Domain
         /// <summary>
-        /// Available domains
+        /// Available domains for current user
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(Entities.DomainsResponse), StatusCodes.Status200OK)]
@@ -485,8 +492,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Set current domain as selected
+        /// Set the current domain for user 
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(LoginOutput), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -556,8 +564,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// Available translations
+        /// Get the translations for the language
         /// </summary>
+        /// <param name="language"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(LanguagesResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -585,7 +594,7 @@ namespace Zesty.Core.Controllers
 
         #region User
         /// <summary>
-        /// User info
+        /// Current user info
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(InfoResponse), StatusCodes.Status200OK)]
@@ -607,8 +616,9 @@ namespace Zesty.Core.Controllers
         }
 
         /// <summary>
-        /// User by reset token
+        /// Get user info by reset token
         /// </summary>
+        /// <param name="token"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(UserByResetTokenResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -632,12 +642,18 @@ namespace Zesty.Core.Controllers
                 throw new ApiNotFoundException(token.ToString());
             }
 
+            if (response.User.Id != Context.Current.User.Id && !Context.Current.User.Authorizations.Any(x => x.Role.Name == "Administrators" && x.Domain.Id == Context.Current.User.Domain.Id))
+            {
+                ThrowAccessDenied(Messages.AccessDenied);
+            }
+
             return GetOutput(response);
         }
 
         /// <summary>
-        /// User property set
+        /// Set to the current user a property
         /// </summary>
+        /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -683,7 +699,7 @@ namespace Zesty.Core.Controllers
 
         #region Utility
         /// <summary>
-        /// Client settings
+        /// Get Client settings (ex. PasswordRegex)
         /// </summary>
         /// <returns></returns>
         [ProducesResponseType(typeof(ClientSettingsResponse), StatusCodes.Status200OK)]
