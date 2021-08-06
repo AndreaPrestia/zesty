@@ -34,8 +34,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Login")]
+        [HttpPost("Login")]
         public IActionResult Login(LoginRequest request)
         {
             ValidateEntity<LoginRequest>(request);
@@ -130,8 +129,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Logout")]
+        [HttpGet("Logout")]
         public IActionResult Logout()
         {
             Business.Authorization.Logout(base.CurrentHttpContext);
@@ -155,8 +153,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Otp")]
+        [HttpPost("Otp")]
         public IActionResult OneTimePassword(OneTimePasswordRequest request)
         {
             ValidateEntity<OneTimePasswordRequest>(request);
@@ -241,8 +238,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Reset")]
+        [HttpGet("Reset")]
         public IActionResult SetResetToken(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -282,8 +278,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Reset")]
+        [HttpPost("Reset")]
         public IActionResult ResetPassword(ResetPasswordRequest request)
         {
             ValidateEntity<ResetPasswordRequest>(request);
@@ -309,8 +304,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Password")]
+        [HttpPost("Password")]
         public IActionResult Password(PasswordRequest request)
         {
             ValidateEntity<PasswordRequest>(request);
@@ -356,8 +350,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Refresh")]
+        [HttpGet("Refresh")]
         public IActionResult Refresh()
         {
             string bearer = HttpContext.Request.Headers["ZestyApiBearer"];
@@ -399,8 +392,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Token")]
+        [HttpGet("Token")]
         public IActionResult Token(bool isReusable)
         {
             return GetOutput(new TokenResponse()
@@ -424,8 +416,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Roles")]
+        [HttpGet("Roles")]
         public IActionResult Roles(Guid domain)
         {
             if (domain == Guid.Empty)
@@ -453,8 +444,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Resources")]
+        [HttpGet("Resources")]
         public IActionResult Resources()
         {
             RequireDomain();
@@ -479,8 +469,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Domains")]
+        [HttpGet("Domains")]
         public IActionResult Domains()
         {
             RequireUser();
@@ -504,8 +493,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Domain")]
+        [HttpPost("Domain")]
         public IActionResult Domain(DomainRequest request)
         {
             ValidateEntity<DomainRequest>(request);
@@ -553,8 +541,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Languages")]
+        [HttpGet("Languages")]
         public IActionResult Languages()
         {
             return GetOutput(new LanguagesResponse()
@@ -576,8 +563,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Translations")]
+        [HttpGet("Translations")]
         public IActionResult Translations(string language)
         {
             if (string.IsNullOrWhiteSpace(language))
@@ -605,8 +591,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Info")]
+        [HttpGet("Info")]
         public IActionResult Info()
         {
             return GetOutput(new InfoResponse()
@@ -628,8 +613,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("ResetToken")]
+        [HttpGet("ResetToken")]
         public IActionResult UserByResetToken(Guid token)
         {
             UserByResetTokenResponse response = new UserByResetTokenResponse()
@@ -663,8 +647,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Property")]
+        [HttpPost("Property")]
         public IActionResult Property(PropertyRequest request)
         {
             ValidateEntity<PropertyRequest>(request);
@@ -710,8 +693,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("ClientSettings")]
+        [HttpGet("ClientSettings")]
         public IActionResult ClientSettings()
         {
             return GetOutput(new ClientSettingsResponse()

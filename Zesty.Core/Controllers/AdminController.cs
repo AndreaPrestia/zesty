@@ -29,8 +29,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Domain")]
+        [HttpPost("Domain")]
         public IActionResult Domain(AddDomainRequest request)
         {
             ValidateEntity<AddDomainRequest>(request);
@@ -62,8 +61,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Domains")]
+        [HttpGet("Domains")]
         public IActionResult Domains()
         {
             return GetOutput(new DomainsResponse()
@@ -87,8 +85,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Role")]
+        [HttpPost("Role")]
         public IActionResult Role(AddRoleRequest request)
         {
             ValidateEntity<AddRoleRequest>(request);
@@ -119,8 +116,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Roles")]
+        [HttpGet("Roles")]
         public IActionResult Roles()
         {
             return GetOutput(new RolesResponse()
@@ -144,8 +140,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Resource")]
+        [HttpPost("Resource")]
         public IActionResult Resource(ResourceAddRequest request)
         {
             ValidateEntity<ResourceAddRequest>(request);
@@ -190,8 +185,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Resource/All")]
+        [HttpGet("Resource/All")]
         public IActionResult ResourceAll()
         {
             return GetOutput(new ResourcesAllResponse() { Resources = Business.Resource.ResourceAll() });
@@ -210,8 +204,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Resource/Authorize")]
+        [HttpPost("Resource/Authorize")]
         public IActionResult ResourceAuthorize(ResourceAuthorizeRequest request)
         {
             ValidateEntity(request);
@@ -234,8 +227,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("Resource/Deauthorize")]
+        [HttpPost("Resource/Deauthorize")]
         public IActionResult ResourceDeauthorize(ResourceAuthorizeRequest request)
         {
             ValidateEntity(request);
@@ -258,8 +250,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpDelete]
-        [Route("Resource")]
+        [HttpDelete("Resource")]
         public IActionResult ResourceDelete(Guid id)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
@@ -292,8 +283,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Resource/Grants")]
+        [HttpGet("Resource/Grants")]
         public IActionResult ResourceGrants(Guid roleId)
         {
             return GetOutput(new ResourcesGrantsResponse()
@@ -314,8 +304,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Resources")]
+        [HttpGet("Resources")]
         public IActionResult ResourceList()
         {
             return GetOutput(new ResourceListResponse() { Resources = Business.Resource.ResourceList() });
@@ -334,8 +323,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPatch]
-        [Route("Resource")]
+        [HttpPatch("Resource")]
         public IActionResult ResourceUpdate(ResourceUpdateRequest request)
         {
             ValidateEntity(request);
@@ -386,8 +374,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("User")]
+        [HttpPost("User")]
         public IActionResult UserAdd(AddUserRequest request)
         {
             ValidateEntity<AddUserRequest>(request);
@@ -425,8 +412,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("User/Authorize")]
+        [HttpPost("User/Authorize")]
         public IActionResult UserAuthorize(UserAuthorizeRequest request)
         {
             ValidateEntity<UserAuthorizeRequest>(request);
@@ -464,8 +450,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
-        [Route("User/Deauthorize")]
+        [HttpPost("User/Deauthorize")]
         public IActionResult UserDeauthorize(UserAuthorizeRequest request)
         {
             ValidateEntity<UserAuthorizeRequest>(request);
@@ -503,8 +488,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpDelete]
-        [Route("User")]
+        [HttpDelete("User")]
         public IActionResult UserDelete(Guid id)
         {
             RequireUser();
@@ -532,8 +516,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("User")]
+        [HttpGet("User")]
         public IActionResult UserGet(Guid id)
         {
             Entities.User user = Business.User.Get(id);
@@ -562,8 +545,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpDelete]
-        [Route("User/HardDelete")]
+        [HttpDelete("User/HardDelete")]
         public IActionResult UserHardDelete(Guid id)
         {
             RequireUser();
@@ -591,8 +573,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Users")]
+        [HttpGet("Users")]
         public IActionResult UserList()
         {
             return GetOutput(new UserListResponse()
@@ -614,8 +595,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpPatch]
-        [Route("User")]
+        [HttpPatch("User")]
         public IActionResult UserUpdate(UserUpdateRequest request)
         {
             ValidateEntity(request);

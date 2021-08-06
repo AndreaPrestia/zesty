@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Zesty.Core.Common;
 
@@ -33,14 +34,14 @@ namespace Zesty.Web
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ToDo API",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://example.com/terms"),
+                    Title = "Zesty",
+                    Description = "Zesty classic API",
+                    TermsOfService = new Uri("https://github.com/AndreaPrestia/zesty"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Shayne Boyer",
-                        Email = string.Empty,
-                        Url = new Uri("https://twitter.com/spboyer"),
+                        Name = "Andrea Prestia",
+                        Email = "prestia.andrea94@gmail.com",
+                        Url = new Uri("https://github.com/AndreaPrestia"),
                     },
                     License = new OpenApiLicense
                     {
@@ -81,7 +82,7 @@ namespace Zesty.Web
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
                 c.RoutePrefix = string.Empty;
             });
 

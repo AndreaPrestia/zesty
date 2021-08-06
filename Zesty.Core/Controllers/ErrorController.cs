@@ -9,12 +9,13 @@ using Zesty.Core.Exceptions;
 namespace Zesty.Core.Controllers
 {
     [ApiController]
+    [Produces("application/json")]
     public class ErrorController : AnonymousController
     {
         private static readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         readonly bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
 
-        [Route("/error")]
+        [HttpGet("/error")]
         public IActionResult Error()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();

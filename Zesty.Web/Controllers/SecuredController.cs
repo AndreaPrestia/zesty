@@ -23,8 +23,7 @@ namespace Zesty.Web.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Secured")]
+        [HttpGet("Secured")]
         public IActionResult Secured()
         {
             return GetOutput($"Hi {Context.Current.User.Username}", 200, ContentType.TextPlain);
@@ -42,8 +41,7 @@ namespace Zesty.Web.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
-        [Route("Free")]
+        [HttpGet("Free")]
         public IActionResult Free()
         {
             return GetOutput("Hi i'm free", 200, ContentType.TextPlain);
