@@ -122,8 +122,6 @@ namespace Zesty.Core.Api.System
         public string Domain { get; set; }
         [Required]
         public string Password { get; set; }
-        [Required]
-        public int Number { get; set; }
         public string Bearer { get; set; }
     }
 

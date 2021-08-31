@@ -1240,7 +1240,7 @@ namespace Zesty.Core.Storage
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("Zesty_Domain_TwoFactorAuthentication"))
+                using (SqlCommand command = new SqlCommand("Zesty_Domain_TwoFactorAuthentication", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
 

@@ -13,7 +13,8 @@ namespace Zesty.Core.Business
 
         private static string setDomainResource = Settings.Get("SetDomainResourceName", "/system.domain.api");
 
-        private static string setDomainResourceController = Settings.Get("SetDomainResourceController", "/api/Secured/Domain");
+        private static string setDomainResourceController = Settings.Get("SetDomainResourceController", "/api/System/Domain");
+        private static string setDomainListResourceController = Settings.Get("SetDomainListResourceController", "/api/System/Domains");
 
         public static void Logout(HttpContext context)
         {
@@ -44,7 +45,7 @@ namespace Zesty.Core.Business
                 throw new SecurityException(Messages.AccessDenied);
             }
 
-            if (user.Domain == null && path != setDomainResource && path != setDomainResourceController)
+            if (user.Domain == null && path != setDomainResource && path != setDomainResourceController && path != setDomainListResourceController)
             {
                 logger.Warn($"Access denied for resource {path} for null user.Domain");
 

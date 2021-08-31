@@ -31,6 +31,7 @@ namespace Zesty.Core.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status405MethodNotAllowed)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status501NotImplemented)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status502BadGateway)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -114,7 +115,7 @@ namespace Zesty.Core.Controllers
 
             HttpContext.Session.Set(response.Output.User);
 
-            return GetOutput(loginOutput);
+            return GetOutput(response);
         }
 
         /// <summary>
