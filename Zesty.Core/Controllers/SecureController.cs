@@ -41,7 +41,7 @@ namespace Zesty.Core.Controllers
 
             if (item != null)
             {
-                if(path.StartsWith("/api"))
+                if (path.StartsWith("/api"))
                 {
                     if (!item.Contains(';'))
                     {
@@ -94,7 +94,7 @@ namespace Zesty.Core.Controllers
             }
             else
             {
-                if(user == null)
+                if (user == null)
                 {
                     LoadUser(bearer);
 
@@ -235,6 +235,11 @@ namespace Zesty.Core.Controllers
             {
                 throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
             }
+        }
+
+        protected bool CheckProperty(Type type, string propertyName)
+        {
+            return type.GetProperty(propertyName) != null;
         }
     }
 }
