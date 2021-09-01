@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Zesty.Core.Entities
 {
     public class Resource
@@ -14,5 +16,6 @@ namespace Zesty.Core.Entities
         public bool RequireToken { get; set; }
         public string Type { get; set; }
         public Domain Domain { get; set; }
+        public List<Resource> Childs { get; set; }
     }
 }

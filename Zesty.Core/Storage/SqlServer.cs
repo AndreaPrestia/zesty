@@ -718,6 +718,13 @@ namespace Zesty.Core.Storage
                             list.Add(resource);
                         }
 
+                        List<Resource> all = list;
+
+                        foreach (Resource r in list)
+                        {
+                            Populate(r, all);
+                        }
+
                         return list;
                     }
                 }
@@ -858,6 +865,21 @@ namespace Zesty.Core.Storage
             foreach (Domain child in domain.Childs)
             {
                 Populate(child, domains);
+            }
+        }
+
+        private static void Populate(Resource resource, List<Resource> resources)
+        {
+            if (resource == null)
+            {
+                return;
+            }
+
+            resource.Childs = resources.Where(x => x.ParentId == resource.Id).ToList();
+
+            foreach (Resource child in resource.Childs)
+            {
+                Populate(child, resources);
             }
         }
 
