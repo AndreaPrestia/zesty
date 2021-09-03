@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Net.WebSockets;
 using Zesty.Core.Entities.Settings;
 using Zesty.Core.Middleware;
 
