@@ -704,7 +704,7 @@ namespace Zesty.Core.Storage
 
                         while (reader.Read())
                         {
-                            Resource resource = new Resource();
+                            Resource resource = resource = new Resource();
 
                             resource.Id = reader.Get<Guid>("Id");
                             resource.ParentId = reader.Get<Guid>("ParentId");
@@ -714,16 +714,13 @@ namespace Zesty.Core.Storage
                             resource.Url = reader.Get<string>("Url");
                             resource.IsPublic = reader.Get<bool>("IsPublic");
                             resource.RequireToken = reader.Get<bool>("RequireToken");
+                            resource.Order = reader.Get<int>("Order");
+                            resource.Childs = new List<Resource>();
 
                             list.Add(resource);
                         }
 
-                        List<Resource> all = list;
-
-                        foreach (Resource r in list)
-                        {
-                            Populate(r, all);
-                        }
+                        list = list.BuildResourceTree();
 
                         return list;
                     }

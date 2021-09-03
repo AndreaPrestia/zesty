@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
+using Zesty.Core.Entities;
 using Zesty.Core.Entities.Settings;
 using Zesty.Core.Middleware;
 
@@ -119,6 +121,42 @@ namespace Zesty.Core.Common
             }
 
             return s.Substring(start, length);
+        }
+
+        public static List<Resource> BuildResourceTree(this List<Resource> source)
+        {
+            var resources = source.GroupBy(i => i.ParentId);
+
+            List<Resource> roots = source.GroupBy(i => i.ParentId).FirstOrDefault(g => g.Key == Guid.Empty).ToList();
+
+            if (roots.Count > 0)
+            {
+                var dict = resources.Where(g => g.Key != Guid.Empty).ToDictionary(g => g.Key, g => g.ToList());
+
+                for (int i = 0; i < roots.Count; i++)
+                {
+                    AddChildren(roots[i], dict);
+                }
+            }
+
+            return roots;
+        }
+
+        private static void AddChildren(Resource node, IDictionary<Guid, List<Resource>> source)
+        {
+            if (source.ContainsKey(node.Id))
+            {
+                node.Childs = source[node.Id];
+
+                for (int i = 0; i < node.Childs.Count; i++)
+                {
+                    AddChildren(node.Childs[i], source);
+                }
+            }
+            else
+            {
+                node.Childs = new List<Resource>();
+            }
         }
     }
 }
