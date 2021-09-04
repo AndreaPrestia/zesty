@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
 using Zesty.Core.Entities.Settings;
@@ -74,6 +75,8 @@ namespace Zesty.Core.Controllers
             base.OnActionExecuting(context);
 
             Context.Current.Reset();
+
+            CanAccess(HttpContext.Connection.RemoteIpAddress.ToString());
 
             string scheme = HttpContext.Request.Scheme;
             string host = HttpContext.Request.Host.Value;
@@ -249,6 +252,20 @@ namespace Zesty.Core.Controllers
         protected void ThrowApplicationError(string message)
         {
             throw new ApiApplicationErrorException(message);
+        }
+
+        private void CanAccess(string ipAddress)
+        {
+            int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
+
+            int accessLimitMinutes = Settings.GetInt("AccessLimitMinutes", 5);
+
+            DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
+
+            if (Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit)
+            {
+                throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
+            }
         }
     }
 }
