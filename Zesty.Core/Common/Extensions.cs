@@ -125,6 +125,11 @@ namespace Zesty.Core.Common
 
         public static List<Resource> BuildResourceTree(this List<Resource> source)
         {
+            if (source == null || source.Count() == 0)
+            {
+                return new List<Resource>();
+            }
+
             var resources = source.GroupBy(i => i.ParentId);
 
             List<Resource> roots = source.GroupBy(i => i.ParentId).FirstOrDefault(g => g.Key == Guid.Empty).ToList();
