@@ -18,8 +18,6 @@ namespace Zesty.Core.Controllers
     {
         private static readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
-        readonly bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
-
         private TimeKeeper timeKeeper = new TimeKeeper();
 
         protected double TimeKeeperDuration
