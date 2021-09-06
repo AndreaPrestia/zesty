@@ -35,22 +35,11 @@ namespace Zesty.Core.Controllers
 
             logger.Info($"Request: {url}");
 
-            string item = Settings.List("UrlWhitelist").Where(x => x == $"{path};{method}").FirstOrDefault();
+            bool isPublic = Business.Resource.IsPublicResource(path, method);
 
-            if (item != null)
+            if (isPublic)
             {
-                if (path.StartsWith("/api"))
-                {
-                    if (!item.Contains(';'))
-                    {
-                        throw new SecurityException(Messages.AccessDenied);
-                    }
-
-                    if (!method.Equals(item.Split(';')[1]))
-                    {
-                        throw new SecurityException(Messages.AccessDenied);
-                    }
-                }
+                logger.Info($"The resource {path} is public");
 
                 return;
             }

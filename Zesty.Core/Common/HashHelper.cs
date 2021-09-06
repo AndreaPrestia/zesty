@@ -1,12 +1,11 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Zesty.Core.Entities.Settings;
 
 namespace Zesty.Core.Common
 {
-    static class HashHelper
+    public static class HashHelper
     {
-        internal static string GetSha256(string text)
+        public static string GetSha256(string text)
         {
             byte[] b = Encoding.Default.GetBytes(text);
 

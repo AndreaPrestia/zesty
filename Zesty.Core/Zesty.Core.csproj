@@ -27,7 +27,6 @@ To have more information go to https://github.com/AndreaPrestia/zesty
   <ItemGroup>
     <Folder Include="Middleware\" />
     <Folder Include="Handlers\" />
-    <Folder Include="Storage\" />
     <Folder Include="Api\Sample\" />
     <Folder Include="Api\System\Admin\User\" />
     <Folder Include="Api\System\Admin\Role\" />

@@ -6,7 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zesty.Core", "Zesty.Core\Ze
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zesty.Web", "Zesty.Web\Zesty.Web.csproj", "{88259605-521F-461D-B78F-162DC973FBBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zesty.Configuration", "Zesty.Configuration\Zesty.Configuration.csproj", "{6C399059-044F-4D0D-9FD4-BA72E591C36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zesty.Configuration", "Zesty.Configuration\Zesty.Configuration.csproj", "{6C399059-044F-4D0D-9FD4-BA72E591C36D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zesty.Microsoft.SqlServer", "Zesty.Microsoft.SqlServer\Zesty.Microsoft.SqlServer.csproj", "{7A9E947D-13A0-40EF-957A-BDF2A8F82DF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{6C399059-044F-4D0D-9FD4-BA72E591C36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C399059-044F-4D0D-9FD4-BA72E591C36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C399059-044F-4D0D-9FD4-BA72E591C36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9E947D-13A0-40EF-957A-BDF2A8F82DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9E947D-13A0-40EF-957A-BDF2A8F82DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9E947D-13A0-40EF-957A-BDF2A8F82DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9E947D-13A0-40EF-957A-BDF2A8F82DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -49,5 +49,10 @@ namespace Zesty.Core.Business
         {
             storage.DeauthorizeResource(resourceId, roleId);
         }
+
+        internal static bool IsPublicResource(string path, string method = null)
+        {
+            return storage.IsPublicResource(path, method);
+        }
     }
 }

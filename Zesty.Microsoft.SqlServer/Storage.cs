@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using Zesty.Core;
 using Zesty.Core.Common;
 using Zesty.Core.Entities;
 using Zesty.Core.Entities.Settings;
 
-namespace Zesty.Core.Storage
+namespace Zesty.Microsoft.SqlServer
 {
-    public class SqlServer : IStorage
+    public class Storage : IStorage
     {
         private static NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
 
@@ -49,7 +50,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public List<Entities.Resource> GetResources(Guid roleId)
+        public List<Core.Entities.Resource> GetResources(Guid roleId)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -63,11 +64,11 @@ namespace Zesty.Core.Storage
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        List<Entities.Resource> list = new List<Resource>();
+                        List<Core.Entities.Resource> list = new List<Resource>();
 
                         while (reader.Read())
                         {
-                            Entities.Resource resource = new Resource();
+                            Core.Entities.Resource resource = new Resource();
 
                             resource.Id = reader.Get<Guid>("Id");
 
@@ -80,7 +81,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public List<Entities.Resource> GetResources()
+        public List<Core.Entities.Resource> GetResources()
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -92,11 +93,11 @@ namespace Zesty.Core.Storage
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        List<Entities.Resource> list = new List<Resource>();
+                        List<Core.Entities.Resource> list = new List<Resource>();
 
                         while (reader.Read())
                         {
-                            Entities.Resource resource = new Resource();
+                            Core.Entities.Resource resource = new Resource();
 
                             resource.Id = reader.Get<Guid>("Id");
                             resource.ParentId = reader.Get<Guid>("ParentId");
@@ -117,9 +118,9 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public List<Entities.Resource> GetAllResources()
+        public List<Core.Entities.Resource> GetAllResources()
         {
-            List<Entities.Resource> list = new List<Resource>();
+            List<Core.Entities.Resource> list = new List<Resource>();
 
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -133,7 +134,7 @@ namespace Zesty.Core.Storage
                     {
                         while (reader.Read())
                         {
-                            Entities.Resource resource = new Entities.Resource();
+                            Core.Entities.Resource resource = new Core.Entities.Resource();
 
                             resource.Id = reader.Get<Guid>("Id");
                             resource.ParentId = reader.Get<Guid>("ParentId");
@@ -145,7 +146,7 @@ namespace Zesty.Core.Storage
                             resource.RequireToken = reader.Get<bool>("RequireToken");
                             resource.Type = reader.Get<string>("Type");
 
-                            resource.Domain = new Entities.Domain();
+                            resource.Domain = new Core.Entities.Domain();
 
                             resource.Domain.Id = reader.Get<Guid>("DomainId");
                             resource.Domain.Name = reader.Get<string>("Domain");
@@ -159,7 +160,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public void Add(Entities.Role role)
+        public void Add(Core.Entities.Role role)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -177,7 +178,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public void Add(Entities.Domain domain)
+        public void Add(Core.Entities.Domain domain)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -196,9 +197,9 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public List<Entities.Role> GetRoles()
+        public List<Core.Entities.Role> GetRoles()
         {
-            List<Entities.Role> list = new List<Entities.Role>();
+            List<Core.Entities.Role> list = new List<Core.Entities.Role>();
 
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -212,7 +213,7 @@ namespace Zesty.Core.Storage
                     {
                         while (reader.Read())
                         {
-                            Entities.Role role = new Entities.Role();
+                            Core.Entities.Role role = new Core.Entities.Role();
 
                             role.Id = reader.Get<Guid>("Id");
                             role.Name = reader.Get<string>("Name");
@@ -264,7 +265,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public void Update(Entities.User user)
+        public void Update(Core.Entities.User user)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -285,7 +286,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public Entities.User GetUser(string user)
+        public Core.Entities.User GetUser(string user)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -299,7 +300,7 @@ namespace Zesty.Core.Storage
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        Entities.User u = null;
+                        Core.Entities.User u = null;
 
                         if (reader.Read())
                         {
@@ -321,7 +322,7 @@ namespace Zesty.Core.Storage
 
         }
 
-        public List<Entities.User> Users()
+        public List<Core.Entities.User> Users()
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -333,11 +334,11 @@ namespace Zesty.Core.Storage
 
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        List<Entities.User> users = new List<User>();
+                        List<Core.Entities.User> users = new List<User>();
 
                         while (reader.Read())
                         {
-                            Entities.User user = new User();
+                            Core.Entities.User user = new User();
 
                             user.Id = reader.Get<Guid>("Id");
                             user.Username = reader.Get<string>("Username");
@@ -390,7 +391,7 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public Guid Add(Entities.User user)
+        public Guid Add(Core.Entities.User user)
         {
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -482,7 +483,7 @@ namespace Zesty.Core.Storage
 
         }
 
-        public void SetProperty(string name, string value, Entities.User user)
+        public void SetProperty(string name, string value, Core.Entities.User user)
         {
             string statement = "Zesty_UserProperty_Set";
 
@@ -880,9 +881,9 @@ namespace Zesty.Core.Storage
             }
         }
 
-        public List<Entities.Role> GetRoles(string username, Guid domainId)
+        public List<Core.Entities.Role> GetRoles(string username, Guid domainId)
         {
-            List<Entities.Role> list = new List<Entities.Role>();
+            List<Core.Entities.Role> list = new List<Core.Entities.Role>();
 
             using (SqlConnection connection = new SqlConnection(Settings.Current.StorageSource))
             {
@@ -899,7 +900,7 @@ namespace Zesty.Core.Storage
                     {
                         while (reader.Read())
                         {
-                            Entities.Role role = new Entities.Role();
+                            Core.Entities.Role role = new Core.Entities.Role();
 
                             role.Id = reader.Get<Guid>("Id");
                             role.Name = reader.Get<string>("Name");
