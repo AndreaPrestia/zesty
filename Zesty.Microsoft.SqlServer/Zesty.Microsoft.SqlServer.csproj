@@ -2,10 +2,37 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>AP.Zesty.Microsoft.SqlServer</PackageId>
+    <Authors>Andrea Prestia</Authors>
+    <Copyright>2021 - Andrea Prestia</Copyright>
+    <PackageLicenseExpression>CDDL-1.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/AndreaPrestia/zesty</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AndreaPrestia/zesty/tree/master/Zesty.Microsoft.SqlServer</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>.NetCore;ASP.NETCore;api;SqlServer;Microsoft;MS-SQLServer;webapi;accessmanager;</PackageTags>
+    <PackageReleaseNotes>This is the first version of the Microsoft SQL Server implementation for the IStorage interface of Zesty.</PackageReleaseNotes>
+    <Description>This is the SQL Server implementation of the Zesty.Core.IStorage interface. It can be used always as Zesty in your app.settings.json like this:
+
+ "Zesty": {
+    "StorageImplementationType": "Zesty.Microsoft.SqlServer.Storage, Zesty.Microsoft.SqlServer",
+    "StorageSource": "Server=localhost\\SQLEXPRESS01;Database=Zesty;Trusted_Connection=True;"
+  }</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Product>AP.Zesty.Microsoft.SqlServer</Product>
+    <PackageIcon>MSSQL.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Zesty.Core\Zesty.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\MSSQL.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
