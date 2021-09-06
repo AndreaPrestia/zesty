@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Reflection;
 using System.Security;
 using Zesty.Core.Common;
@@ -76,7 +77,15 @@ namespace Zesty.Core.Controllers
 
             Context.Current.Reset();
 
-            CanAccess(HttpContext.Connection.RemoteIpAddress.ToString());
+            string remoteIp = HttpContext.Connection.RemoteIpAddress.ToString();
+
+            if (!CanAccess(remoteIp))
+            {
+                logger.Warn("Forbidden Request from Remote IP address: {RemoteIp}", remoteIp);
+
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                return;
+            }
 
             string scheme = HttpContext.Request.Scheme;
             string host = HttpContext.Request.Host.Value;
@@ -254,7 +263,7 @@ namespace Zesty.Core.Controllers
             throw new ApiApplicationErrorException(message);
         }
 
-        private void CanAccess(string ipAddress)
+        private bool CanAccess(string ipAddress)
         {
             int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
 
@@ -262,10 +271,7 @@ namespace Zesty.Core.Controllers
 
             DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
 
-            if (Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit)
-            {
-                throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
-            }
+            return Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit;
         }
     }
 }
