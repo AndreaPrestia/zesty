@@ -22,10 +22,11 @@ To have more information go to https://github.com/AndreaPrestia/zesty
     <Product>AP.Zesty.Core</Product>
     <PackageReleaseNotes>Removed SQL Server implementation of IStorage interface from Zesty.Core. Improved error workflow management. Minor bug fixes</PackageReleaseNotes>
     <SignAssembly>false</SignAssembly>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
     <PackageIcon>Zesty.png</PackageIcon>
     <PackageIconUrl />
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
