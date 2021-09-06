@@ -2,15 +2,15 @@
 
 **Zesty** was born with the aim of simplifying the development of web applications, allowing to adopt some practices that improve development and operations.
 
-The **Zesty** solution contains the **Zesty.Core** project (the framework) and **Zesty.Web** (a sample project).
+The **Zesty** solution contains the **Zesty.Core** project (the framework), **Zesty.Configuration** project (now with only MS-SQL Server scripts to generate the database and the a Requests.http file with system APIs), **Zesty.Microsoft.SqlServer** (the project that implements the interface **Zesty.Core.IStorage** for the storage) and **Zesty.Web** (a sample project).
 
-To work **Zesty** needs a storage. The default storage is no more available on Zesty.Core project, but there is a Zesty.Microsoft.SqlServer project that implements the interface   **Zesty.Core.IStorage**. You can still implement the previous interface and configure the key *StorageType* in **appsettings.json** if you want use other technologies.
+To work **Zesty** needs a storage. The default storage is no more available on Zesty.Core project, but there is a Zesty.Microsoft.SqlServer project that implements the interface   **Zesty.Core.IStorage**. You can still implement the previous interface and configure the key *StorageType* in **appsettings.json** if you want use other technologies (i think i will experiment something with MongoDB or something similar).
 
-Inside the **Zesty.Configuration.Scripts.SqlServer** directory there are 15 SQL scripts, with the order at the beginning of the name.
+Inside the **Zesty.Configuration.Scripts.SqlServer** directory there are 15 SQL scripts, with the order of execution as prefix.
 
 ## Usage ##
 
-To create a Zesty-based project, you need to create a .NET Core Web Application (MVC) project and add a reference to **Zesty.Core** (if you want to implement your own storage) or if you want the Sql Server storage just add a reference to **Zesty.Microsoft.SqlServer**.
+To create a Zesty-based project, you need to create a .NET Core Web Application (MVC) project and add a reference to **Zesty.Core** (if you want to implement your own storage in your web project) or, if you want the Sql Server storage just add a reference to **Zesty.Microsoft.SqlServer**.
 
 Add the following section in the **appsettings.json** (with the reference to **Zesty.Microsoft.SqlServer**).
 
