@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/AndreaPrestia/zesty/tree/master/Zesty.Microsoft.SqlServer</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>.NetCore;ASP.NETCore;api;SqlServer;Microsoft;MS-SQLServer;webapi;accessmanager;</PackageTags>
-    <PackageReleaseNotes>This is the first version of the Microsoft SQL Server implementation for the IStorage interface of Zesty.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added references to some Zesty.Core updates</PackageReleaseNotes>
     <Description>This is the SQL Server implementation of the Zesty.Core.IStorage interface. It can be used always as Zesty in your app.settings.json like this:
 
  "Zesty": {
@@ -22,6 +22,9 @@
     <Product>AP.Zesty.Microsoft.SqlServer</Product>
     <PackageIcon>MSSQL.png</PackageIcon>
     <PackageIconUrl />
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
