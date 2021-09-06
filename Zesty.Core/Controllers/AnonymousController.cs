@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using System.Reflection;
 using System.Security;
 using Zesty.Core.Common;
@@ -18,6 +17,8 @@ namespace Zesty.Core.Controllers
     public class AnonymousController : Controller
     {
         private static readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+
+        readonly bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
 
         private TimeKeeper timeKeeper = new TimeKeeper();
 
@@ -268,7 +269,9 @@ namespace Zesty.Core.Controllers
 
             DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
 
-            return Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit;
+            int invalidAccesses = Business.User.InvalidAccesses(ipAddress, start);
+
+            return accessFailureLimit >= invalidAccesses;
         }
     }
 }

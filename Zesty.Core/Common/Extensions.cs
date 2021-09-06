@@ -71,7 +71,7 @@ namespace Zesty.Core.Common
             builder.UseWebSockets(webSocketOptions);
         }
 
-        public static void UseZestyErrorController(this IApplicationBuilder builder)
+        public static void UseZestyError(this IApplicationBuilder builder)
         {
             builder.UseExceptionHandler("/error");
         }

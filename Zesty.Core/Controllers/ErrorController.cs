@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security;
 using Zesty.Core.Common;
@@ -9,13 +10,14 @@ using Zesty.Core.Exceptions;
 namespace Zesty.Core.Controllers
 {
     [ApiController]
-    [Produces("application/json")]
-    public class ErrorController : AnonymousController
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public class ErrorController : ControllerBase
     {
         private static readonly NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
         readonly bool propagateApplicationErrorInFault = Settings.GetBool("PropagateApplicationErrorInFault", false);
 
-        [HttpGet("/error")]
+        [Route("/error")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
@@ -26,46 +28,45 @@ namespace Zesty.Core.Controllers
 
             logger.Error(e);
 
+            int statusCode = 500;
+
             if (e is ApiInvalidArgumentException)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
-
-                return GetOutput(new ErrorResponse { Message = message }, 501);
+                statusCode = 501;
             }
             else if (e is ApiNotFoundException)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
-
-                return GetOutput(new ErrorResponse { Message = message }, 404);
+                statusCode = 404;
             }
             else if (e is ApiTokenExpiredException || e is ApiAccessDeniedException)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
+                statusCode = 401;
 
-                return GetOutput(new ErrorResponse { Message = message }, 401);
+                Business.User.AddAccessFailure(HttpContext.Request.HttpContext.Connection.RemoteIpAddress.ToString());
             }
             else if (e is MissingRequiredProperty)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
-
-                return GetOutput(new ErrorResponse { Message = message }, 400);
+                statusCode = 400;
             }
             else if (e is CustomJsonException)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
-
-                return GetOutput(new ErrorResponse { Message = message }, 502);
+                statusCode = 502;
             }
             else if (e is SecurityException)
             {
-                Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
+                statusCode = 403;
 
-                return GetOutput(new ErrorResponse { Message = message }, 403);
+                Business.User.AddAccessFailure(HttpContext.Request.HttpContext.Connection.RemoteIpAddress.ToString());
             }
 
-            Trace.Write(new TraceItem() { Error = e.Message, Millis = TimeKeeperDuration }, HttpContext);
+            Trace.Write(new TraceItem() { Error = e.Message }, HttpContext);
 
-            return GetOutput(new ErrorResponse { Message = message }, 500);
+            return GetOutput(new ErrorResponse { Message = message }, statusCode);
+        }
+
+        protected IActionResult GetOutput(object response = null, int statusCode = 200, string contentType = null)
+        {
+            return new ContentResult() { Content = response != null ? JsonHelper.Serialize(response) : string.Empty, ContentType = string.IsNullOrEmpty(contentType) ? ContentType.ApplicationJson : contentType, StatusCode = response == null ? StatusCodes.Status204NoContent : statusCode };
         }
     }
 }

@@ -5,9 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using Zesty.Core.Common;
 
 namespace Zesty.Web
@@ -55,13 +52,13 @@ namespace Zesty.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseZestyError();
+
             if (env.IsDevelopment())
             {
-                app.UseZestyErrorController();
             }
             else
             {
-                app.UseZestyErrorController();
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
