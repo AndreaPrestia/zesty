@@ -4,21 +4,21 @@
 
 The **Zesty** solution contains the **Zesty.Core** project (the framework) and **Zesty.Web** (a sample project).
 
-To work **Zesty** needs a storage. The default storage is based on SQL Server, in case you prefer to use another technology to save the information, just implement the **Zesty.Core.IStorage** interface and configure the key *StorageType* in **appsettings.json**.
+To work **Zesty** needs a storage. The default storage is no more available on Zesty.Core project, but there is a Zesty.Microsoft.SqlServer project that implements the interface   **Zesty.Core.IStorage**. You can still implement the previous interface and configure the key *StorageType* in **appsettings.json** if you want use other technologies.
 
-Inside the **Zesty.Core.Scripts** directory there are two SQL scripts, **Create.sql** (contains the commands to create objects) and **Populate.sql** (creates the contents needed to run the **Zesty.Web** project).
+Inside the **Zesty.Configuration.Scripts.SqlServer** directory there are 15 SQL scripts, with the order at the beginning of the name.
 
 ## Usage ##
 
-To create a Zesty-based project, you need to create a .NET Core Web Application (MVC) project and add a reference to **Zesty.Core**.
+To create a Zesty-based project, you need to create a .NET Core Web Application (MVC) project and add a reference to **Zesty.Core** (if you want to implement your own storage) or if you want the Sql Server storage just add a reference to **Zesty.Microsoft.SqlServer**.
 
-Add the following section in the **appsettings.json**.
+Add the following section in the **appsettings.json** (with the reference to **Zesty.Microsoft.SqlServer**).
 
 Be aware to edit the settings with your environment values.
 
 ```json
 "Zesty": {
-    "StorageImplementationType": "Zesty.Core.Storage.SqlServer, Zesty.Core",
+    "StorageImplementationType": "Zesty.Microsoft.SqlServer.Storage, Zesty.Microsoft.SqlServer",
     "StorageSource": "Data Source = 192.168.1.222; Initial Catalog = Zesty; User Id = zestyUser; Password = zesty.Password."
 }
 
@@ -66,6 +66,11 @@ services.AddZesty();
 In the **Startup.cs** file in the method *Configure* add this line of code
 ```c#
 app.UseZesty();
+```
+If you want to use Zesty with classic .NET Core APIs add the following line in the beginning of method *Configure*
+
+```c#
+app.UseZestyError();
 ```
 
 ## TODO ##
