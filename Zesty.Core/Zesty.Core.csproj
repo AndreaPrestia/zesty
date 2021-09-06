@@ -2,6 +2,26 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Andrea Prestia</Authors>
+    <Company>Andrea Prestia</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>CDDL-1.0</PackageLicenseExpression>
+    <Description>Zesty was born with the aim of simplifying the development of web applications, allowing to adopt some practices that improve development and operations.
+
+This is the Zesty.Core package.
+
+To have more information go to https://github.com/AndreaPrestia/zesty
+</Description>
+    <PackageProjectUrl>https://github.com/AndreaPrestia/zesty</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AndreaPrestia/zesty</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>apidevelopment;.netcore;asp.netcore;webapi;accessmanager;api;</PackageTags>
+    <PackageId>AP.Zesty</PackageId>
+    <Copyright>2021 - Andrea Prestia</Copyright>
+    <Product>AP.Zesty.Core</Product>
+    <PackageReleaseNotes>First NuGet release of Zesty.Core fork from Andrea Prestia.</PackageReleaseNotes>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
