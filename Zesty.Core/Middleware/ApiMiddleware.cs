@@ -34,7 +34,12 @@ namespace Zesty.Core.Middleware
 
             try
             {
-                CanAccess(context.Request.HttpContext.Connection.RemoteIpAddress.ToString());
+                string remoteIp = context.Request.HttpContext.Connection.RemoteIpAddress.ToString();
+
+                if (!CanAccess(remoteIp))
+                {
+                    throw new SecurityException($"Forbidden Request from Remote IP address: {remoteIp}");
+                }
 
                 LoadUser(context);
 
@@ -217,7 +222,7 @@ namespace Zesty.Core.Middleware
             }
         }
 
-        private void CanAccess(string ipAddress)
+        private bool CanAccess(string ipAddress)
         {
             int accessFailureLimit = Settings.GetInt("AccessFailureLimit", 3);
 
@@ -225,10 +230,7 @@ namespace Zesty.Core.Middleware
 
             DateTime start = DateTime.Now.AddMinutes(-accessLimitMinutes);
 
-            if (Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit)
-            {
-                throw new SecurityException(string.Format(Messages.LoginBanned, accessLimitMinutes));
-            }
+            return Business.User.InvalidAccesses(ipAddress, start) >= accessFailureLimit;
         }
 
         private void LoadUser(HttpContext context)

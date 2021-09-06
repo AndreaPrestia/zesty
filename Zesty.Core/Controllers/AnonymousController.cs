@@ -81,10 +81,7 @@ namespace Zesty.Core.Controllers
 
             if (!CanAccess(remoteIp))
             {
-                logger.Warn("Forbidden Request from Remote IP address: {RemoteIp}", remoteIp);
-
-                HttpContext.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                return;
+                throw new SecurityException($"Forbidden Request from Remote IP address: {remoteIp}");
             }
 
             string scheme = HttpContext.Request.Scheme;
